@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    overflow: hidden;
+    font-family: 'Quicksand', sans-serif;
+    user-select: none;
+}
+
+#canvas-container {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 1;
+}
+
+/* Màn hình Loader */
+#loader {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 64, 129, 0.2);
+    border-top-color: #ff4081;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.load-status { color: #ff4081; margin-top: 15px; font-size: 13px; letter-spacing: 2px; }
+
+/* THIẾT KẾ NÚT GIỮ VÀ VÒNG TRÒN TIẾN TRÌNH DEARGIFT */
+#hold-container {
+    position: fixed;
+    bottom: 12%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 120px;
+    height: 120px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease;
+}
+
+.progress-ring {
+    position: absolute;
+    transform: rotate(-90deg);
+}
+
+.progress-ring__circle {
+    stroke-dasharray: 326.72;
+    stroke-dashoffset: 326.72;
+    transition: stroke-dashoffset 0.1s linear;
+}
+
+#hold-btn {
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    z-index: 12;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 0 20px rgba(255,255,255,0.05);
+    transition: all 0.2s ease;
+}
+#hold-btn:active {
+    transform: scale(0.95);
+    background: rgba(255, 64, 129, 0.2);
+    border-color: #ff4081;
+}
+
+/* NÚT CHUYỂN CẢNH CHUNG */
+#next-stage-btn {
+    position: fixed;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    padding: 15px 40px;
+    border-radius: 30px;
+    border: 1px solid #ff4081;
+    background: rgba(0,0,0,0.6);
+    color: #ff4081;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 2px;
+    box-shadow: 0 0 15px rgba(255, 64, 129, 0.3);
+    transition: all 0.3s ease;
+}
+#next-stage-btn:hover { background: #ff4081; color: #fff; box-shadow: 0 0 30px #ff4081; }
+
+/* ICON THƯ GÓC PHẢI */
+#mini-letter-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 60px;
+    height: 60px;
+    background: #ff4081;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 30;
+    box-shadow: 0 0 25px #ff4081;
+    animation: bounce 2s infinite;
+    transition: all 0.3s ease;
+}
+.mini-envelope { color: white; font-size: 26px; }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+/* GIAO DIỆN BỨC THƯ TÂN CỔ ĐIỂN CAO CẤP */
+#letter-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(12px);
+}
+
+.vintage-letter {
+    background: #fdfaf2; /* Màu giấy da cổ kính */
+    width: 90%;
+    max-width: 440px;
+    max-height: 80vh;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    overflow-y: auto;
+    text-align: center;
+    position: relative;
+    border: 1px solid #eadeca;
+}
+
+.wax-seal {
+    width: 45px;
+    height: 45px;
+    background: #b71c1c;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    margin: 0 auto 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.letter-title { font-family: 'Dancing Script', cursive; font-size: 32px; color: #5d4037; margin-bottom: 20px; }
+.letter-body { font-size: 16px; color: #4e342e; line-height: 1.8; text-align: justify; margin-bottom: 25px; min-height: 80px; }
+
+#final-love-photo {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 5px solid white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    transition: opacity 1s ease;
+}
+
+.close-btn {
+    padding: 10px 25px;
+    background: #5d4037;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.hidden-element { display: none !important; }
+.hidden-opacity { opacity: 0; }
+.show-opacity { opacity: 1 !important; }
